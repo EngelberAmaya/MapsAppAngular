@@ -2,6 +2,12 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
 
+Levantar proyecto en Dev
+
+1. Clonar repositorio
+2. Instalar dependencias
+3. Generar el .env basado en el .env.template
+
 ## Development server
 
 To start a local development server, run:
