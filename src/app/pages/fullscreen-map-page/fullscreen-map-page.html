@@ -17,4 +17,13 @@
     (input)="zoomLevel.set($event.target.valueAsNumber)"
   />
 
+  <h2 class="text-2xl font-bold text-black mb-2">Coordenadas</h2>
+  <pre class="text-sm text-gray-500 font-normal">{{
+      {
+        latitude: cordinates().lat | number:'1.4-4',
+        longitude: cordinates().lng | number:'1.4-4',
+      } | json
+    }}
+  </pre>
+
 </section>

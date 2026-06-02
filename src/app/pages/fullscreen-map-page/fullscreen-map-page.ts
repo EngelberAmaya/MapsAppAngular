@@ -2,11 +2,11 @@ import { AfterViewInit, Component, ElementRef, effect, signal, viewChild } from 
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { environment } from '../../../environments/environment';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-fullscreen-map-page',
-  imports: [DecimalPipe ],
+  imports: [DecimalPipe, JsonPipe ],
   templateUrl: './fullscreen-map-page.html',
   styleUrl: './fullscreen-map-page.css',
 })
@@ -15,6 +15,10 @@ export class FullscreenMapPage implements AfterViewInit {
   divElement = viewChild<ElementRef>('map');
   zoomLevel = signal(14);
   map = signal<mapboxgl.Map | null>(null);
+  cordinates = signal({
+    lng: -71.06776,
+    lat: 42.35816,
+  })
 
   zoomEffect = effect(() => {
     if (!this.map()) return;
@@ -26,11 +30,12 @@ export class FullscreenMapPage implements AfterViewInit {
     if (!this.divElement()?.nativeElement) return;
 
     const mapElement = this.divElement()?.nativeElement;
+    const { lng, lat } = this.cordinates();
 
     const map = new mapboxgl.Map({
       accessToken: environment.mapboxKey, // associates the map with your Mapbox account and its permissions
       container: mapElement, // container ID
-      center: [-71.06776, 42.35816], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+      center: [lng, lat], // starting position [lng, lat]. Note that lat must be set between -90 and 90
       zoom: this.zoomLevel() // starting zoom
     });
 
@@ -43,6 +48,11 @@ export class FullscreenMapPage implements AfterViewInit {
       const newZoom = event.target.getZoom();
       this.zoomLevel.set(newZoom);
     });
+
+    map.on('moveend', () => {
+      const center = map.getCenter();
+      this.cordinates.set(center)
+    })
 
     this.map.set(map);
 
