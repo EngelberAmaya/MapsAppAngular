@@ -1,1 +1,38 @@
-<div #map class="h-[calc(100vh-64px)]"></div>
+<div #map class="h-[calc(100dvh-64px)]"></div>
+
+<section class="fixed top-20 left-4 sm:left-10 w-fit max-w-[calc(100dvw-2rem)] max-h-[calc(100dvh-6rem)] bg-white rounded p-5 flex flex-col">
+  <h2 class="text-xl font-bold text-black mb-2">
+    Marcadores
+  </h2>
+
+  <div class="flex flex-col gap-2 overflow-y-auto pr-1">
+    @for (marker of markers(); track marker.id) {
+      <div class="form-control"
+        (click)="flyToMarker(marker.mapboxMarker.getLngLat())"
+      >
+        <label class="label cursor-pointer gap-3 justify-between">
+          <span class="label-text text-black text-xs leading-5">
+            <span class="block">
+              Longitud: {{ marker.mapboxMarker.getLngLat().lng | number:'1.4-6' }}
+            </span>
+            <span class="block">
+              Latitud: {{ marker.mapboxMarker.getLngLat().lat | number:'1.4-6' }}
+            </span>
+          </span>
+          <input
+            type="radio"
+            name="radio-10"
+            class="radio shrink-0"
+            checked="checked"
+            [style.background-color]="marker.mapboxMarker._color"
+          />
+        </label>
+      </div>
+    }
+    @empty {
+      <div class="flex justify-center items-center bg-blue-100 rounded py-5">
+        <p class="text-xs text-secondary">No hay marcadores</p>
+      </div>
+    }
+  </div>
+</section>
