@@ -1,66 +1,83 @@
-# MapsApp
+# Maps App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Aplicación web desarrollada con Angular para explorar mapas interactivos, agregar y administrar marcadores, y visualizar propiedades con mapas individuales. Los mapas se renderizan con Mapbox GL JS.
 
-Levantar proyecto en Dev
+## Funcionalidades
 
-1. Clonar repositorio
-2. Instalar dependencias
-3. Generar el `.env` basado en el `.env.template`
-4. Ejecutar el comando `npm run set-envs`
+### Mapa de pantalla completa
 
-## Development server
+- Muestra un mapa interactivo con controles de navegación, escala y pantalla completa.
+- Permite cambiar el nivel de zoom con un control deslizante.
+- Muestra las coordenadas del centro actual del mapa y las actualiza al terminar de moverlo.
 
-To start a local development server, run:
+### Mapa de marcadores
+
+- Agrega un marcador de color aleatorio al hacer clic en el mapa.
+- Muestra en un panel las coordenadas de cada marcador.
+- Al seleccionar un marcador de la lista, el mapa se desplaza hasta su ubicación.
+- Al hacer doble clic en un elemento de la lista, elimina ese marcador del mapa y de la lista.
+
+### Propiedades
+
+- Presenta tarjetas de propiedades de ejemplo con nombre, descripción y etiquetas.
+- Muestra un mapa no interactivo con un marcador para cada propiedad.
+- Adapta la distribución de las tarjetas al tamaño de la pantalla.
+
+### Navegación
+
+- Incluye un menú para cambiar entre las páginas del mapa, los marcadores y las propiedades.
+- Actualiza el título de la barra de navegación según la página actual.
+- Utiliza rutas con hash; por ejemplo: `/#/fullscreen`, `/#/markers` y `/#/houses`.
+
+## Servicios y tecnologías
+
+- **Mapbox GL JS:** renderizado de mapas y administración de marcadores y controles. Requiere un token de Mapbox.
+- **Angular Router:** navegación entre páginas.
+- **RxJS:** lectura de los eventos de navegación para actualizar el título.
+- **Angular Signals:** estado reactivo para zoom, coordenadas y marcadores.
+- **UUID:** identificadores únicos para marcadores y propiedades.
+- **Tailwind CSS y DaisyUI:** estilos y componentes de interfaz.
+
+La aplicación no se conecta a un backend propio. Los datos de propiedades y marcadores se mantienen en el navegador y no se guardan en una base de datos; los marcadores se pierden al recargar la página.
+
+## Requisitos
+
+- Node.js y npm.
+- Un token de acceso de Mapbox.
+
+## Instalación y ejecución
+
+1. Clona el repositorio e instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+2. Crea un archivo `.env` en la raíz del proyecto y agrega tu token:
+
+   ```env
+   MAPBOX_API_KEY=tu_token_de_mapbox
+   ```
+
+3. Genera los archivos de entorno usados por Angular:
+
+   ```bash
+   npm run set-envs
+   ```
+
+4. Inicia el servidor de desarrollo:
+
+   ```bash
+   npm start
+   ```
+
+   Abre `http://localhost:4200/` en el navegador. La aplicación se recarga automáticamente cuando se modifican los archivos fuente.
+
+## Comandos disponibles
 
 ```bash
-ng serve
+npm start        # Servidor local de desarrollo
+npm run build    # Compilación de producción
+npm run watch    # Compilación de desarrollo en modo watch
+npm test         # Pruebas unitarias
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
