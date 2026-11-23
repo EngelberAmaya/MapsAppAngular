@@ -1,6 +1,6 @@
 <div #map class="h-[calc(100dvh-64px)]"></div>
 
-<section class="fixed top-20 left-4 sm:left-10 w-fit max-w-[calc(100dvw-2rem)] max-h-[calc(100dvh-6rem)] bg-white rounded p-5 flex flex-col">
+<section class="fixed top-20 left-4 sm:left-10 w-48 max-w-[calc(100dvw-2rem)] max-h-[calc(100dvh-6rem)] bg-white rounded p-5 flex flex-col">
   <h2 class="text-xl font-bold text-black mb-2">
     Marcadores
   </h2>
@@ -9,6 +9,7 @@
     @for (marker of markers(); track marker.id) {
       <div class="form-control"
         (click)="flyToMarker(marker.mapboxMarker.getLngLat())"
+        (dblclick)="deleteMarker(marker)"
       >
         <label class="label cursor-pointer gap-3 justify-between">
           <span class="label-text text-black text-xs leading-5">

@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, effect, signal, viewChild } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { environment } from '../../../environments/environment';
 import { DecimalPipe, JsonPipe } from '@angular/common';
 
