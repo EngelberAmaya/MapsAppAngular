@@ -68,7 +68,6 @@ export class MarkersPage implements AfterViewInit {
 
     this.markers.set([newMarker, ...this.markers()]);
 
-    console.log('markers', this.markers());
   }
 
   flyToMarker(lngLat: mapboxgl.LngLatLike){
